@@ -14,6 +14,6 @@ public class Main {
         window.setVisible(true); //видимость окна
         TicTacToe game = new TicTacToe();
         window.add(game);
-        System.out.println("Игра оконченааааааааааааааааа");
+        System.out.println("Игра окончена");
     }
 }
