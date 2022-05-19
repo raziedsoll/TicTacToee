@@ -5,7 +5,6 @@ import java.awt.*;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Запускаем игру");
         JFrame window = new JFrame("TicTacToe"); // главное меню
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);// закрытие окна
         window.setSize(400, 400); // размер окна
@@ -14,6 +13,5 @@ public class Main {
         window.setVisible(true); //видимость окна
         TicTacToe game = new TicTacToe();
         window.add(game);
-        System.out.println("Игра окончена");
     }
 }

@@ -8,8 +8,8 @@ public class TicTacToe extends JComponent {
     public static final int FIELD_EMPTY = 0; //пустое поле
     public static final int FIELD_X = 10; // поле с крестиком
     public static final int FIELD_O = 200; // поле с ноликом
-    int[][] field; // массив игрового поля
-    boolean isXturn; // true - ход X , false - ход O
+    private int[][] field; // массив игрового поля
+    private boolean isXturn; // true - ход X , false - ход O
 
     public TicTacToe(){
         enableEvents(AWTEvent.MOUSE_EVENT_MASK);
@@ -35,7 +35,7 @@ public class TicTacToe extends JComponent {
             // переводим координаты в индексы ячейки в массиве field
             int i = (int) ((float) x / getWidth() * 3);
             int j = (int) ((float) y / getHeight() * 3);
-            // проверяем, что выбранная ячейка пусьа и туда можно сходить
+            // проверяем, что выбранная ячейка пуста и туда можно сходить
             if (field[i][j] == FIELD_EMPTY) {
                 // чей ход
                 field[i][j] = isXturn ? FIELD_X : FIELD_O;
@@ -44,11 +44,11 @@ public class TicTacToe extends JComponent {
             }
             int res = checkState();
             if(res != 0){
-                if(res == FIELD_O * 3){
+                if (res == FIELD_O * 3){
                     //победил O
                     JOptionPane.showMessageDialog(this, "Нолики выйграли",
                             "Победа!", JOptionPane.INFORMATION_MESSAGE);
-                } else if(res == FIELD_X * 3){
+                } else if (res == FIELD_X * 3){
                     // победилп x
                     JOptionPane.showMessageDialog(this, "Крестики выйграли",
                             "Победа!", JOptionPane.INFORMATION_MESSAGE);
@@ -67,7 +67,7 @@ public class TicTacToe extends JComponent {
 
 
     @Override
-    protected void paintComponent(Graphics graphics ){
+    protected void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
         //очищаем область
         graphics.clearRect(0, 0, getWidth(), getHeight());
@@ -75,6 +75,8 @@ public class TicTacToe extends JComponent {
         drawGrid(graphics);
         // рисуем текущие крестики и нолики
         drawXO(graphics);
+        // рисуем красную линию в победной зоне
+        drawRedLine(graphics);
     }
 
     void drawGrid(Graphics graphics){
@@ -86,6 +88,48 @@ public class TicTacToe extends JComponent {
         for (int i = 1; i < 3; i++) {
             graphics.drawLine(0, dh * i, w, dh * i);
             graphics.drawLine(dw * i, 0, dw * i , h);
+        }
+    }
+
+    void drawRedLine(Graphics graphics){
+        graphics.setColor(Color.RED);
+        int w = getWidth(); //ширина игрового поля
+        int h = getHeight(); // высота игрового поля
+        int dw = w / 3; //делим ширину на 3
+        int dh = h / 3; //делим высоту на 3
+
+        // проверка диагоналей
+        int diag = 0;
+        int diag2 = 0;
+        for (int i = 0; i < 3; i++) {
+            //сумма значений по диагонали от левого угла
+            diag += field[i][i];
+            // сумма значений по диагонали от правого угла
+            diag2 += field[i][2 - i];
+        }
+        if(diag == FIELD_O * 3 || diag == FIELD_X * 3)
+            graphics.drawLine(0,0,w,h);
+        if(diag2 == FIELD_O * 3 || diag2 == FIELD_X * 3)
+            graphics.drawLine(w,0,0,h);
+
+        // проверка строк и столбов
+        int check_i, check_j;
+        for(int i = 0 ; i < 3; i++){
+            check_i = 0;
+            check_j = 0;
+            check_i = field[0][i] + field[1][i] + field[2][i];
+            check_j = field[i][0] + field[i][1] + field[i][2];
+
+            if(check_i == FIELD_O * 3 || check_i == FIELD_X * 3){
+                // рисование красной линии
+                graphics.drawLine(0, dh * (i+1) - 61, w,dh * (i+1) - 61);
+                break;
+            }
+            if(check_j == FIELD_O * 3 || check_j == FIELD_X * 3){
+                // рисование красной линии
+                graphics.drawLine(dw * (i + 1) - 61, 0, dw * (i + 1) - 61,h);
+                break;
+            }
         }
     }
 
@@ -135,14 +179,17 @@ public class TicTacToe extends JComponent {
             diag += field[i][i];
             // сумма значений по диагонали от правого угла
             diag2 += field[i][2 - i];
+
         }
+
         if(diag == FIELD_O * 3 || diag == FIELD_X * 3)
             return diag;
         if(diag2 == FIELD_O * 3 || diag2 == FIELD_X * 3)
             return diag2;
+
         int check_i, check_j;
         boolean hasEmpty = false;
-        //будем бешать по всем рядам
+        //будем бегать по всем рядам
         for(int i = 0 ; i < 3; i++){
             check_i = 0;
             check_j = 0;
