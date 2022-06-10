@@ -115,8 +115,6 @@ public class TicTacToe extends JComponent {
         // проверка строк и столбов
         int check_i, check_j;
         for(int i = 0 ; i < 3; i++){
-            check_i = 0;
-            check_j = 0;
             check_i = field[0][i] + field[1][i] + field[2][i];
             check_j = field[i][0] + field[i][1] + field[i][2];
 
