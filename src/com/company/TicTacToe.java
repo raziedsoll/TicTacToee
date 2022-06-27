@@ -1,5 +1,6 @@
 package com.company;
 
+import javax.management.remote.JMXConnectorFactory;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -10,8 +11,12 @@ public class TicTacToe extends JComponent {
     public static final int FIELD_O = 200; // поле с ноликом
     private int[][] field; // массив игрового поля
     private boolean isXturn; // true - ход X , false - ход O
+    private JFrame menuWindow;
+    private JFrame gameWindow;
 
-    public TicTacToe(){
+    public TicTacToe(JFrame menuWindow, JFrame gameWindow){
+        this.menuWindow = menuWindow;
+        this.gameWindow = gameWindow;
         enableEvents(AWTEvent.MOUSE_EVENT_MASK);
         field = new int[3][3]; // выделяем память
         initGame();
@@ -48,13 +53,19 @@ public class TicTacToe extends JComponent {
                     //победил O
                     JOptionPane.showMessageDialog(this, "Нолики выйграли",
                             "Победа!", JOptionPane.INFORMATION_MESSAGE);
+                             gameWindow.setVisible(false);
+                             menuWindow.setVisible(true);
                 } else if (res == FIELD_X * 3){
                     // победилп x
                     JOptionPane.showMessageDialog(this, "Крестики выйграли",
                             "Победа!", JOptionPane.INFORMATION_MESSAGE);
+                            gameWindow.setVisible(false);
+                            menuWindow.setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(this, "Никто не выйграл!",
                             "Ничья!", JOptionPane.INFORMATION_MESSAGE);
+                            gameWindow.setVisible(false);
+                            menuWindow.setVisible(true);
                 }
                 initGame();
                 repaint();
