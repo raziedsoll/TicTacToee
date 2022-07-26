@@ -9,11 +9,11 @@ public class TicTacToe extends JComponent {
     public static final int FIELD_EMPTY = 0; //пустое поле
     public static final int FIELD_X = 10; // поле с крестиком
     public static final int FIELD_O = 200; // поле с ноликом
-    private int[][] field; // массив игрового поля
-    private int N;
+    final private int[][] field; // массив игрового поля
+    final private int N;
     private boolean isXturn; // true - ход X , false - ход O
-    private JFrame menuWindow;
-    private JFrame gameWindow;
+    final private JFrame menuWindow;
+    final private JFrame gameWindow;
 
     public TicTacToe(JFrame menuWindow, JFrame gameWindow, int N) {
         this.menuWindow = menuWindow;

@@ -1,9 +1,7 @@
 package com.company;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
 
 
@@ -12,6 +10,7 @@ public class Menu {
         JFrame menuWindow = new JFrame("TicTacToe");
         menuWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         menuWindow.setSize(400, 400);
+        menuWindow.setLocationRelativeTo(null);
         menuWindow.getContentPane().setLayout(null);
 
         JButton button1 = new JButton("Начать игру"); // Начать игру, выбрав размер сетки
@@ -35,13 +34,11 @@ public class Menu {
         ActionListener actionListener3 = new Button3ActionListener();
         button3.addActionListener(actionListener3);
     }
-
-
 }
 
 
 class Button1ActionListener implements ActionListener {
-    private JFrame menuWindow;
+    final private JFrame menuWindow;
 
     Button1ActionListener(JFrame menuWindow) {
         this.menuWindow = menuWindow;
@@ -49,7 +46,7 @@ class Button1ActionListener implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         menuWindow.setVisible(false);
-        selectMenu select_menu = new selectMenu(menuWindow); // Вызов меню выбора размера сетки
+        new selectMenu(menuWindow); // Вызов меню выбора размера сетки
     }
 }
 

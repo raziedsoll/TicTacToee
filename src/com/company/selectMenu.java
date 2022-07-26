@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class selectMenu {
-    private JFrame menuWindow;
+    final private JFrame menuWindow;
 
     selectMenu(JFrame menuWindow) {
         this.menuWindow = menuWindow;
@@ -70,8 +70,8 @@ class Button10ActionListener implements ActionListener {
 
 
 class Button20ActionListener implements ActionListener {
-    private JFrame menuWindow;
-    private JFrame choseWindow;
+    final private JFrame menuWindow;
+    final private JFrame choseWindow;
 
     Button20ActionListener(JFrame menuWindow, JFrame choseWindow) {
         this.menuWindow = menuWindow;
@@ -92,8 +92,8 @@ class Button20ActionListener implements ActionListener {
 }
 
 class Button30ActionListener implements ActionListener {
-    private JFrame menuWindow;
-    private JFrame choseWindow;
+    final private JFrame menuWindow;
+    final private JFrame choseWindow;
 
     Button30ActionListener(JFrame menuWindow, JFrame choseWindow) {
         this.menuWindow = menuWindow;
@@ -114,8 +114,8 @@ class Button30ActionListener implements ActionListener {
 }
 
 class Button40ActionListener implements ActionListener {
-    private JFrame menuWindow;
-    private JFrame choseWindow;
+    final private JFrame menuWindow;
+    final private JFrame choseWindow;
 
     Button40ActionListener(JFrame menuWindow, JFrame choseWindow) {
         this.menuWindow = menuWindow;
